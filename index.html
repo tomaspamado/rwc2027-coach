@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="theme-color" content="#000000"/>
+  <title>RWC 2027 Coach</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏉</text></svg>"/>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sucrase@3.35.0/dist/browser/sucrase.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { width: 100%; height: 100%; background: #000; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+    * { -webkit-tap-highlight-color: transparent; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    (async () => {
+      try {
+        const res = await fetch("./app.jsx?v=" + Date.now());
+        if (!res.ok) throw new Error("Failed to load app.jsx: " + res.status);
+        const jsxSource = await res.text();
+        const stripped = jsxSource.replace(/^import\s+React.*?from\s+['"]react['"];?\s*/m, "");
+        const wrapped = `const { useState, useEffect, useRef, Component } = React;\n${stripped}\nconst container = document.getElementById("root");\nconst reactRoot = ReactDOM.createRoot(container);\nreactRoot.render(React.createElement(App));`;
+        const { code } = sucrase.transform(wrapped, { transforms: ["jsx"], jsxRuntime: "classic", production: true });
+        const blob = new Blob([code], { type: "application/javascript" });
+        const mod = document.createElement("script");
+        mod.src = URL.createObjectURL(blob);
+        mod.onerror = (e) => { document.body.innerHTML = `<div style="color:#ff3b30;padding:40px;font-family:monospace"><b>Script error</b><br>${e}</div>`; };
+        document.head.appendChild(mod);
+      } catch (err) {
+        document.body.innerHTML = `<div style="color:#ff3b30;padding:40px;font-family:monospace"><b>Failed to start</b><br>${err.message}</div>`;
+        console.error(err);
+      }
+    })();
+  </script>
+</body>
+</html>
