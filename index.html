@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Portugal #9 · RWC 2027</title>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+<title>Portugal RWC 2027 Coach</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;background:#000;color:#fff;font-family:-apple-system,'SF Pro Display','SF Pro Text','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
-  #root{height:100%}
-  input,textarea,select{font-size:16px!important}
-  button{touch-action:manipulation}
-  body{overscroll-behavior:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#000;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;color:#fff;overscroll-behavior:none}
+input[type=range]{-webkit-appearance:none;height:4px;border-radius:2px;outline:none;border:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;cursor:pointer}
+textarea,input{font-family:inherit}
+button{font-family:inherit}
+::-webkit-scrollbar{width:0;height:0}
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<div id='root'></div>
+<script crossorigin src='https://unpkg.com/react@18.3.1/umd/react.production.min.js'></script>
+<script crossorigin src='https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js'></script>
 <script>
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 </script>
@@ -11888,7 +11889,8 @@ export default function App() {
     )
     )
   );
-}</script>
+}
+</script>
 <script>
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(App));
