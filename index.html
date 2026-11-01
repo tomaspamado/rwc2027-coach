@@ -11300,175 +11300,220 @@ function AppInner() { // v3.1
 
         , tab==="progress"&&renderProgressTab()
 
-        /* ── OPPOSITION PREP ── */
-        , tab==="opp"&&(
-          React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11280}}
-            , React.createElement('div', { style: {fontSize:13,color:T2,marginBottom:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11281}}, "Pool D · RWC 2027. Study these opponents now."        )
-            , [
-              {
-                flag:"🇮🇪", name:"Ireland", badge:"#1 ranked", color:GRNA,
-                threat:"Ruck recycling speed (sub-3s) + aggressive line speed off turnover. Gibson-Park releases in under 0.35s.",
-                keys:[
-                  {label:"Their weapon","value":"Counter-ruck — steal then blitz in 3 contacts"},
-                  {label:"Your counter","value":"Slow their ruck — jackal early, make them earn every breakdown"},
-                  {label:"Kick target","value":"Box kick wide left, away from Lowe (right wing). Force fullback competition"},
-                  {label:"9 vs 9","value":"Gibson-Park: flat pass off ruck, minimal backswing. Match his tempo or go round him"},
-                  {label:"Lineout","value":"McCarthy + O'Mahony calls. Watch for quick throw option if lineout disrupted"},
-                ],
-                tasks:["Watch Ireland vs Leinster — count their recycling speed per phase","Chart Gibson-Park's kick zones from last 3 Tests","Study O'Mahony lineout calls — front, middle, back patterns"],
-              },
-              {
-                flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿", name:"Scotland", badge:"Top 10", color:BLU,
-                threat:"Wide game + Ali Price box kick accuracy. They spread it fast and use the width from phase 1.",
-                keys:[
-                  {label:"Their weapon","value":"Ali Price box kick to wide right — well-drilled chase unit"},
-                  {label:"Your counter","value":"Contest their box kick zone — position chasers wide right early"},
-                  {label:"Kick target","value":"Wide channel kicks right — test their right-wing under pressure"},
-                  {label:"9 vs 9","value":"Price: quick taps from 5m, runs the short side often. Defend the short side"},
-                  {label:"Defence","value":"Their wide pass game — shoot out in pairs, don't let them isolate your 13"},
-                ],
-                tasks:["Watch Scotland vs France — map Price's kick landing zones","Chart Scotland's right-side attack frequency per half","Study how Price uses the short-side from set piece"],
-              },
-              {
-                flag:"🇺🇾", name:"Uruguay", badge:"Americas 1", color:AMB,
-                threat:"Physicality at breakdown. They will try to slow your ball and target you personally as a smaller player.",
-                keys:[
-                  {label:"Their weapon","value":"Jackal + truck-and-trailer — they play on the edge of the laws"},
-                  {label:"Your counter","value":"Clear rucks in under 1.5s — don't let them settle over the ball"},
-                  {label:"Kick target","value":"Short box kicks behind their rush — force them to defend in retreat"},
-                  {label:"9 vs 9","value":"Their 9 is physical, less accurate under pressure. Attack his weak hand side"},
-                  {label:"Set piece","value":"Their scrum is strong — get ball away fast, don't let their 8 dominate carry"},
-                ],
-                tasks:["Watch Uruguay vs Argentina — count ruck contest speed","Study their flanker jackalling technique — positions to avoid","Chart where Uruguay concede most — find the pattern"],
-              },
-            ].map(opp=>(
-              React.createElement('div', { key: opp.name, style: {...card,overflow:"visible"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11320}}
-                , React.createElement('div', { style: {padding:"16px 18px",borderBottom:`1px solid rgba(255,255,255,0.07)`,display:"flex",alignItems:"center",gap:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11321}}
-                  , React.createElement('span', { style: {fontSize:40,lineHeight:1,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11322}}, opp.flag)
-                  , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11323}}
-                    , React.createElement('div', { style: {fontSize:18,fontWeight:800,color:T1,letterSpacing:"-0.02em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11324}}, opp.name)
-                    , React.createElement('div', { style: {fontSize:11,color:opp.color,fontWeight:700,letterSpacing:"0.04em",textTransform:"uppercase",marginTop:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11325}}, opp.badge)
+        /* ── OPPOSITION PREP — next match only, from calendar ── */
+        , tab==="opp"&&(()=>{
+          const OPP_INTEL = {
+            "Ireland":{
+              badge:"#1 ranked", color:GRNA,
+              threat:"Ruck recycling speed (sub-3s) + aggressive line speed off turnover. Gibson-Park releases in under 0.35s.",
+              keys:[
+                {label:"Their weapon",  value:"Counter-ruck — steal then blitz in 3 contacts"},
+                {label:"Your counter",  value:"Slow their ruck — jackal early, make them earn every breakdown"},
+                {label:"Kick target",   value:"Box kick wide left, away from Lowe (right wing). Force fullback competition"},
+                {label:"9 vs 9",        value:"Gibson-Park: flat pass off ruck, minimal backswing. Match his tempo or go round him"},
+                {label:"Lineout",       value:"McCarthy + O'Mahony calls. Watch for quick throw option if lineout disrupted"},
+              ],
+              tasks:["Watch Ireland vs Leinster — count their recycling speed per phase","Chart Gibson-Park's kick zones from last 3 Tests","Study O'Mahony lineout calls — front, middle, back patterns"],
+            },
+            "Scotland":{
+              badge:"Top 10", color:BLU,
+              threat:"Wide game + Ali Price box kick accuracy. They spread it fast and use the width from phase 1.",
+              keys:[
+                {label:"Their weapon",  value:"Ali Price box kick to wide right — well-drilled chase unit"},
+                {label:"Your counter",  value:"Contest their box kick zone — position chasers wide right early"},
+                {label:"Kick target",   value:"Wide channel kicks right — test their right-wing under pressure"},
+                {label:"9 vs 9",        value:"Price: quick taps from 5m, runs the short side often. Defend the short side"},
+                {label:"Defence",       value:"Their wide pass game — shoot out in pairs, don't let them isolate your 13"},
+              ],
+              tasks:["Watch Scotland vs France — map Price's kick landing zones","Chart Scotland's right-side attack frequency per half","Study how Price uses the short-side from set piece"],
+            },
+            "Uruguay":{
+              badge:"Americas 1", color:AMB,
+              threat:"Physicality at breakdown. They will try to slow your ball and target you personally as a smaller player.",
+              keys:[
+                {label:"Their weapon",  value:"Jackal + truck-and-trailer — they play on the edge of the laws"},
+                {label:"Your counter",  value:"Clear rucks in under 1.5s — don't let them settle over the ball"},
+                {label:"Kick target",   value:"Short box kicks behind their rush — force them to defend in retreat"},
+                {label:"9 vs 9",        value:"Their 9 is physical, less accurate under pressure. Attack his weak hand side"},
+                {label:"Set piece",     value:"Their scrum is strong — get ball away fast, don't let their 8 dominate carry"},
+              ],
+              tasks:["Watch Uruguay vs Argentina — count ruck contest speed","Study their flanker jackalling technique — positions to avoid","Chart where Uruguay concede most — find the pattern"],
+            },
+          };
+
+          const nextMatch = _optionalChain([matchStatus, 'optionalAccess', _329 => _329.match]) || null;
+          const daysUntil = _nullishCoalesce(_optionalChain([matchStatus, 'optionalAccess', _330 => _330.daysUntil]), () => ( null));
+
+          if (!nextMatch) return (
+            React.createElement('div', { style: {display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"64px 20px",textAlign:"center",gap:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11323}}
+              , React.createElement('span', { style: {fontSize:48}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11324}}, "🏆")
+              , React.createElement('div', { style: {fontSize:17,fontWeight:700,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11325}}, "No upcoming matches"  )
+              , React.createElement('div', { style: {fontSize:13,color:T3,lineHeight:1.65,maxWidth:260}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11326}}, "Add matches in the calendar and opposition intel will appear here automatically."           )
+            )
+          );
+
+          const intel = OPP_INTEL[nextMatch.opponent] || null;
+          const opp = intel
+            ? {...intel, name:nextMatch.opponent, flag:nextMatch.flag||"🏉"}
+            : {name:nextMatch.opponent, flag:nextMatch.flag||"🏉", badge:nextMatch.competition||"", color:GOLD, threat:null, keys:[], tasks:[]};
+
+          const urgency = daysUntil!=null&&daysUntil<=7?REDA:daysUntil!=null&&daysUntil<=21?AMB:GOLD;
+          const daysLabel = daysUntil===0?"Today":daysUntil===1?"Tomorrow":daysUntil!=null?`In ${daysUntil} days`:"";
+
+          const doneCount = opp.tasks.filter((_,i)=>!!oppTasksDone[`${opp.name}_${i}`]).length;
+          const pct = opp.tasks.length ? Math.round(doneCount/opp.tasks.length*100) : 0;
+
+          return (
+            React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11342}}
+
+              /* Hero */
+              , React.createElement('div', { style: {...card,background:`linear-gradient(145deg,${opp.color}18 0%,rgba(0,0,0,0) 55%),${S1}`,border:`1px solid ${opp.color}2e`,overflow:"visible"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11345}}
+                , React.createElement('div', { style: {background:`${urgency}14`,borderBottom:`1px solid ${urgency}1e`,padding:"7px 18px",display:"flex",alignItems:"center",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11346}}
+                  , React.createElement('span', { style: {fontSize:10,fontWeight:700,color:urgency,letterSpacing:"0.1em",textTransform:"uppercase"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11347}}, "Next match" )
+                  , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11348}})
+                  , React.createElement('span', { style: {fontSize:13,fontWeight:800,color:urgency}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11349}}, daysLabel)
+                  , nextMatch.venue&&React.createElement('span', { style: {fontSize:11,color:T3,marginLeft:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11350}}, "· " , nextMatch.venue)
+                )
+                , React.createElement('div', { style: {padding:"20px 18px 16px",display:"flex",alignItems:"center",gap:16}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11352}}
+                  , React.createElement('span', { style: {fontSize:58,lineHeight:1,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11353}}, opp.flag)
+                  , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11354}}
+                    , React.createElement('div', { style: {fontSize:28,fontWeight:900,color:T1,letterSpacing:"-0.03em",lineHeight:1.05}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11355}}, opp.name)
+                    , opp.badge&&React.createElement('div', { style: {fontSize:11,color:opp.color,fontWeight:700,letterSpacing:"0.07em",textTransform:"uppercase",marginTop:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11356}}, opp.badge)
+                    , React.createElement('div', { style: {fontSize:11,color:T3,marginTop:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11357}}, nextMatch.date, nextMatch.competition?` · ${nextMatch.competition}`:"")
                   )
                 )
-                , React.createElement('div', { style: {padding:"14px 18px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11328}}
-                  /* Threat pill */
-                  , React.createElement('div', { style: {
-                    display:"inline-flex",alignItems:"flex-start",gap:6,
-                    background:"rgba(255,55,95,0.1)",border:"1px solid rgba(255,55,95,0.25)",
-                    borderRadius:10,padding:"8px 12px",marginBottom:14,width:"100%",boxSizing:"border-box",
-                  }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11330}}
-                    , React.createElement('span', { style: {fontSize:13,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11335}}, "⚠️")
-                    , React.createElement('span', { style: {fontSize:12,color:REDA,fontWeight:600,lineHeight:1.5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11336}}, opp.threat)
+                , opp.threat&&(
+                  React.createElement('div', { style: {margin:"0 16px 18px",display:"flex",alignItems:"flex-start",gap:8,background:"rgba(255,55,95,0.1)",border:"1px solid rgba(255,55,95,0.2)",borderRadius:12,padding:"10px 14px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11361}}
+                    , React.createElement('span', { style: {fontSize:14,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11362}}, "⚠️")
+                    , React.createElement('span', { style: {fontSize:12,color:REDA,fontWeight:600,lineHeight:1.55}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11363}}, opp.threat)
                   )
-                  , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:7,marginBottom:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11338}}
+                )
+              )
+
+              /* Key matchups */
+              , opp.keys.length>0&&(
+                React.createElement('div', { style: {...card}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11370}}
+                  , React.createElement('div', { style: {padding:"14px 18px 6px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11371}}, React.createElement('div', { style: {...lbl,color:opp.color}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11371}}, "🎯 Key matchups"  ))
+                  , React.createElement('div', { style: {padding:"8px 18px 16px",display:"flex",flexDirection:"column",gap:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11372}}
                     , opp.keys.map(k=>(
-                      React.createElement('div', { key: k.label, style: {display:"flex",gap:8,alignItems:"flex-start"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11340}}
-                        , React.createElement('span', { style: {...lbl,color:opp.color,minWidth:94,flexShrink:0,paddingTop:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11341}}, k.label)
-                        , React.createElement('span', { style: {fontSize:12,color:T2,lineHeight:1.55}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11342}}, k.value)
+                      React.createElement('div', { key: k.label, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11374}}
+                        , React.createElement('div', { style: {fontSize:10,fontWeight:700,color:opp.color,letterSpacing:"0.07em",textTransform:"uppercase",marginBottom:3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11375}}, k.label)
+                        , React.createElement('div', { style: {fontSize:13,color:T2,lineHeight:1.55}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11376}}, k.value)
                       )
                     ))
                   )
-                  , React.createElement('div', { style: {...lbl,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11346}}, "📋 Study tasks"  )
-                  , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11347}}
+                )
+              )
+
+              /* Study tasks */
+              , opp.tasks.length>0&&(
+                React.createElement('div', { style: {...card}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11385}}
+                  , React.createElement('div', { style: {padding:"14px 18px 8px",display:"flex",alignItems:"center",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11386}}
+                    , React.createElement('div', { style: {...lbl,flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11387}}, "📋 Study tasks"  )
+                    , React.createElement('span', { style: {fontSize:11,fontWeight:700,color:doneCount===opp.tasks.length?opp.color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11388}}, doneCount, "/", opp.tasks.length)
+                  )
+                  , React.createElement('div', { style: {margin:"0 18px 12px",height:3,background:S2,borderRadius:2,overflow:"hidden"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11390}}
+                    , React.createElement('div', { style: {height:"100%",width:`${pct}%`,background:opp.color,borderRadius:2,transition:"width 0.3s ease-out"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11391}})
+                  )
+                  , React.createElement('div', { style: {padding:"0 14px 14px",display:"flex",flexDirection:"column",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11393}}
                     , opp.tasks.map((t,i)=>{
-                      const key = `${opp.name}_${i}`;
-                      const taskDone = !!oppTasksDone[key];
-                      const toggle = () => {
-                        const next = {...oppTasksDone, [key]: !taskDone};
+                      const key=`${opp.name}_${i}`;
+                      const taskDone=!!oppTasksDone[key];
+                      const toggle=()=>{
+                        const next={...oppTasksDone,[key]:!taskDone};
                         setOppTasksDone(next);
-                        store.set("rwc_opp_tasks", JSON.stringify(next));
+                        store.set("rwc_opp_tasks",JSON.stringify(next));
                       };
                       return (
                         React.createElement('button', { key: i, onClick: toggle, style: {
-                          display:"flex",alignItems:"flex-start",gap:10,padding:"11px 13px",borderRadius:12,
+                          display:"flex",alignItems:"flex-start",gap:12,padding:"12px 14px",borderRadius:12,
                           border:`1px solid ${taskDone?opp.color+"55":BD}`,
-                          background:taskDone?`${opp.color}18`:"rgba(255,255,255,0.02)",
+                          background:taskDone?`${opp.color}12`:"rgba(255,255,255,0.02)",
                           cursor:"pointer",textAlign:"left",
-                          transition:"background 0.18s ease-out, border-color 0.18s ease-out",
-                        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11357}}
-                          , React.createElement('span', { style: {
-                            fontSize:15,flexShrink:0,
-                            color:taskDone?opp.color:T3,
-                            fontWeight:taskDone?700:400,
-                          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11364}}, taskDone?"✓":"○")
-                          , React.createElement('span', { style: {
-                            fontSize:12,lineHeight:1.55,fontWeight:taskDone?600:400,
-                            color:taskDone?opp.color:T2,
-                            textDecoration:taskDone?"line-through":"none",
-                          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11369}}, t)
+                        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11403}}
+                          , React.createElement('div', { style: {width:20,height:20,borderRadius:"50%",flexShrink:0,marginTop:1,background:taskDone?opp.color:"transparent",border:`2px solid ${taskDone?opp.color:T3}`,display:"flex",alignItems:"center",justifyContent:"center"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11409}}
+                            , taskDone&&React.createElement('span', { style: {fontSize:10,color:BG,fontWeight:900,lineHeight:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11410}}, "✓")
+                          )
+                          , React.createElement('span', { style: {fontSize:13,lineHeight:1.5,fontWeight:taskDone?600:400,color:taskDone?opp.color:T2,textDecoration:taskDone?"line-through":"none"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11412}}, t)
                         )
                       );
                     })
                   )
                 )
               )
-            ))
-          )
-        )
+
+              , !intel&&(
+                React.createElement('div', { style: {...card,padding:"18px",textAlign:"center"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11421}}
+                  , React.createElement('div', { style: {fontSize:13,color:T3,lineHeight:1.65}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11422}}, "No detailed intel yet for "     , opp.name, ".", React.createElement('br', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 11422}}), "Add notes in the Notes tab."     )
+                )
+              )
+            )
+          );
+        })()
 
         /* ── GAMES ── */
         , tab==="games"&&(
-          React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11386}}
+          React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11431}}
 
             /* PB DASHBOARD */
             , (()=>{
               const pbs = { passing:loadPB("passing"), reacpads:loadPB("reacpads"), numtrack:loadPB("numtrack"), ruckscan:loadPB("ruckscan") };
               if (!Object.values(pbs).some(p=>p)) return null;
               const lastStr = (pb) => {
-                if (!_optionalChain([pb, 'optionalAccess', _329 => _329.lastPlayed])) return "";
+                if (!_optionalChain([pb, 'optionalAccess', _331 => _331.lastPlayed])) return "";
                 const t = pb.lastTime ? ` · ${pb.lastTime}` : "";
                 return pb.lastPlayed + t;
               };
               return (
-                React.createElement('div', { style: {...card,padding:CP.normal,marginBottom:4,borderColor:"rgba(201,168,76,0.15)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11398}}
-                  , React.createElement('div', { style: {display:"flex",alignItems:"center",gap:8,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11399}}
-                    , React.createElement('span', { style: {fontSize:16}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11400}}, "🏆")
-                    , React.createElement('div', { style: {...lbl,color:GOLD}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11401}}, "Personal bests" )
+                React.createElement('div', { style: {...card,padding:CP.normal,marginBottom:4,borderColor:"rgba(201,168,76,0.15)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11443}}
+                  , React.createElement('div', { style: {display:"flex",alignItems:"center",gap:8,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11444}}
+                    , React.createElement('span', { style: {fontSize:16}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11445}}, "🏆")
+                    , React.createElement('div', { style: {...lbl,color:GOLD}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11446}}, "Personal bests" )
                   )
-                  , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:7}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11403}}
-                    , pbs.passing&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11404}}
-                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11405}}, "←→")
-                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11406}}
-                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11407}}, "Passing direction" )
-                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11408}}, lastStr(pbs.passing))
-                        , pbs.passing.lastAvgRt&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11409}}, "Last: " , pbs.passing.lastAvgRt, "ms · "  , pbs.passing.lastAccuracy, "%")
+                  , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:7}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11448}}
+                    , pbs.passing&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11449}}
+                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11450}}, "←→")
+                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11451}}
+                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11452}}, "Passing direction" )
+                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11453}}, lastStr(pbs.passing))
+                        , pbs.passing.lastAvgRt&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11454}}, "Last: " , pbs.passing.lastAvgRt, "ms · "  , pbs.passing.lastAccuracy, "%")
                       )
-                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11411}}, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GOLD,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11411}}, pbs.passing.avgRt, "ms"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11411}}, "best ↓" ))
+                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11456}}, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GOLD,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11456}}, pbs.passing.avgRt, "ms"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11456}}, "best ↓" ))
                     )
-                    , pbs.reacpads&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11413}}
-                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11414}}, "🎯")
-                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11415}}
-                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11416}}, "Reaction pads" )
-                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11417}}, lastStr(pbs.reacpads))
-                        , pbs.reacpads.avgRt&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11418}}, "Best: " , pbs.reacpads.avgRt, "ms · "  , pbs.reacpads.accuracy, "%")
+                    , pbs.reacpads&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11458}}
+                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11459}}, "🎯")
+                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11460}}
+                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11461}}, "Reaction pads" )
+                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11462}}, lastStr(pbs.reacpads))
+                        , pbs.reacpads.avgRt&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11463}}, "Best: " , pbs.reacpads.avgRt, "ms · "  , pbs.reacpads.accuracy, "%")
                       )
-                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11420}}, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GRNA,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11420}}, pbs.reacpads.avgRt||"—", React.createElement('span', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11420}}, pbs.reacpads.avgRt?"ms":"")), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11420}}, "best ↓" ))
+                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11465}}, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GRNA,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11465}}, pbs.reacpads.avgRt||"—", React.createElement('span', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11465}}, pbs.reacpads.avgRt?"ms":"")), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11465}}, "best ↓" ))
                     )
-                    , pbs.ruckscan&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11422}}
-                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11423}}, "👀")
-                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11424}}
-                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11425}}, "Ruck scan" )
-                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11426}}, lastStr(pbs.ruckscan))
-                        , pbs.ruckscan.lastScore!==undefined&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11427}}, "Last: " , pbs.ruckscan.lastScore, "/", pbs.ruckscan.lastTotal)
+                    , pbs.ruckscan&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11467}}
+                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11468}}, "👀")
+                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11469}}
+                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11470}}, "Ruck scan" )
+                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11471}}, lastStr(pbs.ruckscan))
+                        , pbs.ruckscan.lastScore!==undefined&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11472}}, "Last: " , pbs.ruckscan.lastScore, "/", pbs.ruckscan.lastTotal)
                       )
-                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11429}}
+                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11474}}
                         , pbs.ruckscan.bestFlashMs
-                          ? React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GRNA,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11431}}, (pbs.ruckscan.bestFlashMs/1000).toFixed(1), "s"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11431}}, "best 100%" ))
-                          : React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11432}}, "—"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11432}}, "no 100% yet"  ))
+                          ? React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:GRNA,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11476}}, (pbs.ruckscan.bestFlashMs/1000).toFixed(1), "s"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11476}}, "best 100%" ))
+                          : React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11477}}, "—"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11477}}, "no 100% yet"  ))
                         
                       )
                     )
-                    , pbs.numtrack&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11436}}
-                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11437}}, "🔢")
-                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11438}}
-                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11439}}, "Number tracker" )
-                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11440}}, lastStr(pbs.numtrack))
-                        , pbs.numtrack.lastScore!==undefined&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11441}}, "Last: " , pbs.numtrack.lastScore, "/", pbs.numtrack.lastTotal)
+                    , pbs.numtrack&&React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,padding:"10px 12px",background:S2,borderRadius:12,border:"1px solid rgba(255,255,255,0.05)"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11481}}
+                      , React.createElement('span', { style: {fontSize:18,width:26,flexShrink:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11482}}, "🔢")
+                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11483}}
+                        , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11484}}, "Number tracker" )
+                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11485}}, lastStr(pbs.numtrack))
+                        , pbs.numtrack.lastScore!==undefined&&React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11486}}, "Last: " , pbs.numtrack.lastScore, "/", pbs.numtrack.lastTotal)
                       )
-                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11443}}
+                      , React.createElement('div', { style: {textAlign:"right"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11488}}
                         , pbs.numtrack.bestFlashMs
-                          ? React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:PRP,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11445}}, (pbs.numtrack.bestFlashMs/1000).toFixed(1), "s"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11445}}, "best 100%" ))
-                          : React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11446}}, "—"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11446}}, "no 100% yet"  ))
+                          ? React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:PRP,letterSpacing:"-0.03em"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11490}}, (pbs.numtrack.bestFlashMs/1000).toFixed(1), "s"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11490}}, "best 100%" ))
+                          : React.createElement(React.Fragment, null, React.createElement('div', { style: {fontSize:18,fontWeight:900,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11491}}, "—"), React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11491}}, "no 100% yet"  ))
                         
                       )
                     )
@@ -11477,7 +11522,7 @@ function AppInner() { // v3.1
               );
             })()
 
-            , React.createElement('div', { style: {...lbl,marginBottom:8,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11455}}, "Cognitive games" )
+            , React.createElement('div', { style: {...lbl,marginBottom:8,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11500}}, "Cognitive games" )
             , [
               {key:"passing",  icon:"●", label:"Passing direction", sub:"12 rounds · colour→pad",    color:BLU},
               {key:"reacpads", icon:"🎯", label:"Reaction pads",    sub:"15 rounds · tap before it fades", color:GRNA},
@@ -11491,20 +11536,20 @@ function AppInner() { // v3.1
                 background:`linear-gradient(135deg, ${g.color}12 0%, ${g.color}06 100%)`,
                 cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:14,
                 boxShadow:`0 4px 20px ${g.color}14, 0 1px 4px rgba(0,0,0,0.4)`,
-              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11463}}
+              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11508}}
                 , React.createElement('div', { style: {
                   width:46,height:46,borderRadius:13,
                   background:`${g.color}22`,border:`1px solid ${g.color}44`,
                   display:"flex",alignItems:"center",justifyContent:"center",
                   flexShrink:0,
-                }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11470}}
-                  , React.createElement('span', { style: {fontSize:22,lineHeight:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11476}}, g.icon)
+                }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11515}}
+                  , React.createElement('span', { style: {fontSize:22,lineHeight:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11521}}, g.icon)
                 )
-                , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11478}}
-                  , React.createElement('div', { style: {fontSize:15,fontWeight:700,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11479}}, g.label)
-                  , React.createElement('div', { style: {fontSize:11,color:T3,marginTop:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11480}}, g.sub)
+                , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11523}}
+                  , React.createElement('div', { style: {fontSize:15,fontWeight:700,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11524}}, g.label)
+                  , React.createElement('div', { style: {fontSize:11,color:T3,marginTop:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11525}}, g.sub)
                 )
-                , React.createElement('span', { style: {fontSize:18,color:g.color,fontWeight:700}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11482}}, "›")
+                , React.createElement('span', { style: {fontSize:18,color:g.color,fontWeight:700}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11527}}, "›")
               )
             ))
           )
@@ -11513,37 +11558,37 @@ function AppInner() { // v3.1
 
         /* ── SETTINGS ── */
         , tab==="settings"&&(
-          React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11491}}
+          React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11536}}
 
             /* BODY */
-            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11494}}, "Player")
+            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11539}}, "Player")
 
             /* player identity */
-            , React.createElement('div', { style: {...card,padding:"16px 17px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11497}}
-              , React.createElement('div', { style: {...lbl,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11498}}, "Identity")
-              , React.createElement('div', { style: {display:"flex",gap:10,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11499}}
-                , React.createElement('div', { style: {flex:1,background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11500}}
-                  , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11501}}, "Name")
+            , React.createElement('div', { style: {...card,padding:"16px 17px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11542}}
+              , React.createElement('div', { style: {...lbl,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11543}}, "Identity")
+              , React.createElement('div', { style: {display:"flex",gap:10,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11544}}
+                , React.createElement('div', { style: {flex:1,background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11545}}
+                  , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11546}}, "Name")
                   , React.createElement('input', {
                     value: settings.playerName||"",
                     onChange: e=>saveSettings({...settings,playerName:e.target.value}),
                     placeholder: "Your name" ,
-                    style: {width:"100%",fontSize:16,fontWeight:700,background:"transparent",border:"none",outline:"none",color:T1,caretColor:GOLD,fontFamily:"inherit",padding:0,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11502}}
+                    style: {width:"100%",fontSize:16,fontWeight:700,background:"transparent",border:"none",outline:"none",color:T1,caretColor:GOLD,fontFamily:"inherit",padding:0,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11547}}
                   )
                 )
-                , React.createElement('div', { style: {width:80,background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11509}}
-                  , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11510}}, "Jersey #" )
+                , React.createElement('div', { style: {width:80,background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11554}}
+                  , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11555}}, "Jersey #" )
                   , React.createElement('input', {
                     type: "number",
                     value: settings.jerseyNumber||"9",
                     onChange: e=>saveSettings({...settings,jerseyNumber:e.target.value.replace(/\D/g,"")||"9"}),
-                    style: {width:"100%",fontSize:24,fontWeight:900,background:"transparent",border:"none",outline:"none",color:GOLD,caretColor:GOLD,fontFamily:"inherit",padding:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11511}}
+                    style: {width:"100%",fontSize:24,fontWeight:900,background:"transparent",border:"none",outline:"none",color:GOLD,caretColor:GOLD,fontFamily:"inherit",padding:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11556}}
                   )
                 )
               )
               /* Position selector */
-              , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11520}}, "Position")
-              , React.createElement('div', { style: {display:"flex",flexWrap:"wrap",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11521}}
+              , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11565}}, "Position")
+              , React.createElement('div', { style: {display:"flex",flexWrap:"wrap",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11566}}
                 , [
                   {key:"1",label:"Loosehead Prop"},{key:"2",label:"Hooker"},{key:"3",label:"Tighthead Prop"},
                   {key:"4",label:"Lock"},{key:"5",label:"Lock"},
@@ -11557,7 +11602,7 @@ function AppInner() { // v3.1
                     React.createElement('button', { key: p.key+p.label, onClick: ()=>saveSettings({...settings,jerseyNumber:p.key}),
                       style: {padding:"5px 10px",borderRadius:8,fontSize:11,fontWeight:sel?700:400,
                         border:`1px solid ${sel?GOLD:BD}`,background:sel?GOLDDIM:"transparent",
-                        color:sel?GOLD:T3,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11532}}, "#"
+                        color:sel?GOLD:T3,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11577}}, "#"
                       , p.key, " " , p.label
                     )
                   );
@@ -11566,18 +11611,18 @@ function AppInner() { // v3.1
             )
 
             /* target weight */
-            , React.createElement('div', { style: {...card,padding:"16px 17px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11544}}
-              , React.createElement('div', { style: {...lbl,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11545}}, "Target weight" )
-              , React.createElement('div', { style: {display:"flex",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11546}}
+            , React.createElement('div', { style: {...card,padding:"16px 17px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11589}}
+              , React.createElement('div', { style: {...lbl,marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11590}}, "Target weight" )
+              , React.createElement('div', { style: {display:"flex",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11591}}
                 , ["Min","Max"].map((label,i)=>{
                   const key=i===0?"weightMin":"weightMax";
                   return (
-                    React.createElement('div', { key: key, style: {flex:1,background:S2,borderRadius:10,padding:"12px 14px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11550}}
-                      , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11551}}, label)
-                      , React.createElement('div', { style: {display:"flex",alignItems:"baseline",gap:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11552}}
+                    React.createElement('div', { key: key, style: {flex:1,background:S2,borderRadius:10,padding:"12px 14px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11595}}
+                      , React.createElement('div', { style: {...lbl,fontSize:9,fontWeight:400,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11596}}, label)
+                      , React.createElement('div', { style: {display:"flex",alignItems:"baseline",gap:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11597}}
                         , React.createElement('input', { type: "number", value: settings[key], onChange: e=>saveSettings({...settings,[key]:parseFloat(e.target.value)||settings[key]}),
-                          style: {width:"100%",fontSize:28,fontWeight:900,background:"transparent",border:"none",outline:"none",color:GOLD,caretColor:GOLD,fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11553}})
-                        , React.createElement('span', { style: {fontSize:14,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11555}}, "kg")
+                          style: {width:"100%",fontSize:28,fontWeight:900,background:"transparent",border:"none",outline:"none",color:GOLD,caretColor:GOLD,fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11598}})
+                        , React.createElement('span', { style: {fontSize:14,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11600}}, "kg")
                       )
                     )
                   );
@@ -11589,21 +11634,21 @@ function AppInner() { // v3.1
             , (()=>{
               const open = expandedSkills.has("section_supplements");
               return (
-                React.createElement('div', { style: {...card,overflow:"hidden"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11567}}
+                React.createElement('div', { style: {...card,overflow:"hidden"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11612}}
                   , React.createElement('button', { onClick: ()=>setExpandedSkills(p=>{const n=new Set(p);n.has("section_supplements")?n.delete("section_supplements"):n.add("section_supplements");return n;}),
-                    style: {width:"100%",display:"flex",alignItems:"center",gap:10,padding:"14px 16px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11568}}
-                    , React.createElement('span', { style: {flex:1,...lbl}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11570}}, "💊 Supplements" )
-                    , React.createElement('span', { style: {fontSize:11,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11571}}, open?"▲":"▼")
+                    style: {width:"100%",display:"flex",alignItems:"center",gap:10,padding:"14px 16px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11613}}
+                    , React.createElement('span', { style: {flex:1,...lbl}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11615}}, "💊 Supplements" )
+                    , React.createElement('span', { style: {fontSize:11,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11616}}, open?"▲":"▼")
                   )
                   , open&&(
-                    React.createElement('div', { style: {borderTop:`1px solid ${BD}`}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11574}}
-                      , React.createElement('div', { style: {padding:"10px 16px",background:REDDIM}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11575}}
-                        , React.createElement('div', { style: {fontSize:11,color:REDA,fontWeight:600}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11576}}, "⚠️ Always choose Informed Sport certified products — tested against the WADA prohibited list."             )
+                    React.createElement('div', { style: {borderTop:`1px solid ${BD}`}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11619}}
+                      , React.createElement('div', { style: {padding:"10px 16px",background:REDDIM}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11620}}
+                        , React.createElement('div', { style: {fontSize:11,color:REDA,fontWeight:600}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11621}}, "⚠️ Always choose Informed Sport certified products — tested against the WADA prohibited list."             )
                       )
                       /* per-supplement: toggle have + set timing */
-                      , React.createElement('div', { style: {padding:"12px 16px",borderTop:`1px solid ${BD}`}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11579}}
-                        , React.createElement('div', { style: {...lbl,fontWeight:400,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11580}}, "My supplements" )
-                        , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11581}}
+                      , React.createElement('div', { style: {padding:"12px 16px",borderTop:`1px solid ${BD}`}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11624}}
+                        , React.createElement('div', { style: {...lbl,fontWeight:400,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11625}}, "My supplements" )
+                        , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11626}}
                           , [...SUPPLEMENT_SCHEDULE, ...(settings.customSupplements||[]).map(s=>({...s,custom:true}))].map(s=>{
                             const mySupps = settings.mySupplements||[];
                             const have = mySupps.includes(s.name);
@@ -11617,7 +11662,7 @@ function AppInner() { // v3.1
                                 background:S2,borderRadius:10,padding:"10px 12px",
                                 border:`1px solid ${have?GRNA+"33":BD}`,
                                 opacity:have?1:0.5,
-                              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11591}}
+                              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11636}}
                                 , isEditing ? (
                                   React.createElement(SuppEditor, {
                                     supp: s, isCustom: !!s.custom,
@@ -11638,35 +11683,35 @@ function AppInner() { // v3.1
                                       setExpandedSkills(p=>{const n=new Set(p);n.delete(editKey);return n;});
                                     },
                                     onCancel: ()=>setExpandedSkills(p=>{const n=new Set(p);n.delete(editKey);return n;}),
-                                    BD: BD, S1: S1, S2: S2, T1: T1, T2: T2, T3: T3, GOLD: GOLD, GRNA: GRNA, REDA: REDA, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11597}}
+                                    BD: BD, S1: S1, S2: S2, T1: T1, T2: T2, T3: T3, GOLD: GOLD, GRNA: GRNA, REDA: REDA, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11642}}
                                   )
                                 ) : (
                                   React.createElement(React.Fragment, null
-                                    , React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,marginBottom:have?8:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11620}}
-                                      , React.createElement('span', { style: {fontSize:18}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11621}}, s.icon||"💊")
-                                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11622}}
-                                        , React.createElement('div', { style: {fontSize:13,fontWeight:600,color:have?T1:T2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11623}}, s.name)
-                                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11624}}, s.dose||"")
+                                    , React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10,marginBottom:have?8:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11665}}
+                                      , React.createElement('span', { style: {fontSize:18}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11666}}, s.icon||"💊")
+                                      , React.createElement('div', { style: {flex:1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11667}}
+                                        , React.createElement('div', { style: {fontSize:13,fontWeight:600,color:have?T1:T2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11668}}, s.name)
+                                        , React.createElement('div', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11669}}, s.dose||"")
                                       )
-                                      , React.createElement('div', { style: {display:"flex",gap:5,alignItems:"center"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11626}}
+                                      , React.createElement('div', { style: {display:"flex",gap:5,alignItems:"center"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11671}}
                                         , React.createElement('button', { onClick: ()=>setExpandedSkills(p=>{const n=new Set(p);n.add(editKey);return n;}),
-                                          style: {fontSize:10,color:T3,background:"transparent",border:`1px solid ${BD}`,borderRadius:6,padding:"3px 8px",cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11627}}, "edit")
+                                          style: {fontSize:10,color:T3,background:"transparent",border:`1px solid ${BD}`,borderRadius:6,padding:"3px 8px",cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11672}}, "edit")
                                         , React.createElement('button', { onClick: ()=>{
                                           const updated = have ? mySupps.filter(n=>n!==s.name) : [...mySupps,s.name];
                                           saveSettings({...settings,mySupplements:updated});
                                         }, style: {
                                           fontSize:11,fontWeight:700,padding:"4px 10px",borderRadius:7,border:"none",
                                           cursor:"pointer",background:have?GRNA:S3,color:have?BG:T3,
-                                        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11629}}, have?"✓":"+ add")
+                                        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11674}}, have?"✓":"+ add")
                                         , s.custom&&React.createElement('button', { onClick: ()=>{
                                           const updated=(settings.customSupplements||[]).filter(cs=>cs.name!==s.name);
                                           const updatedMySupps=mySupps.filter(n=>n!==s.name);
                                           saveSettings({...settings,customSupplements:updated,mySupplements:updatedMySupps});
-                                        }, style: {fontSize:10,color:T3,background:"transparent",border:"none",cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11636}}, "✕")
+                                        }, style: {fontSize:10,color:T3,background:"transparent",border:"none",cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11681}}, "✕")
                                       )
                                     )
                                     , have&&(
-                                      React.createElement('div', { style: {display:"flex",gap:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11644}}
+                                      React.createElement('div', { style: {display:"flex",gap:5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11689}}
                                         , ["morning","pre","night"].map(t=>(
                                           React.createElement('button', { key: t, onClick: ()=>{
                                             const updated = {...suppTimings,[s.name]:t};
@@ -11675,11 +11720,11 @@ function AppInner() { // v3.1
                                             flex:1,fontSize:10,fontWeight:timing===t?700:400,
                                             padding:"5px 4px",borderRadius:7,border:"none",cursor:"pointer",
                                             background:timing===t?GOLD:S3,color:timing===t?BG:T3,
-                                          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11646}}, timingLabels[t])
+                                          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11691}}, timingLabels[t])
                                         ))
                                       )
                                     )
-                                    , have&&s.why&&React.createElement('div', { style: {fontSize:10,color:T3,marginTop:6,lineHeight:1.5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11657}}, s.why.split('.')[0], ".")
+                                    , have&&s.why&&React.createElement('div', { style: {fontSize:10,color:T3,marginTop:6,lineHeight:1.5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11702}}, s.why.split('.')[0], ".")
                                   )
                                 )
                               )
@@ -11687,36 +11732,36 @@ function AppInner() { // v3.1
                           })
 
                           /* add custom supplement */
-                          , React.createElement('div', { style: {borderTop:`1px solid ${BD}`,paddingTop:10,marginTop:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11665}}
+                          , React.createElement('div', { style: {borderTop:`1px solid ${BD}`,paddingTop:10,marginTop:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11710}}
                             , !expandedSkills.has("add_supp") ? (
                               React.createElement('button', { onClick: ()=>setExpandedSkills(p=>{const n=new Set(p);n.add("add_supp");return n;}), style: {
                                 ...btn.ghost,width:"100%",borderStyle:"dashed",
-                              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11667}}, "+ Add custom supplement"   )
+                              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11712}}, "+ Add custom supplement"   )
                             ) : (
-                              React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11671}}
+                              React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11716}}
                                 , React.createElement('input', { placeholder: "Name (e.g. Ashwagandha)"  , id: "supp_name_input",
-                                  style: {padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:16,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11672}})
-                                , React.createElement('div', { style: {display:"flex",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11674}}
+                                  style: {padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:16,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11717}})
+                                , React.createElement('div', { style: {display:"flex",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11719}}
                                   , React.createElement('input', { placeholder: "Dose (e.g. 600mg)"  , id: "supp_dose_input",
-                                    style: {flex:1,padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:16,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11675}})
-                                  , React.createElement('select', { id: "supp_when_input", style: {flex:1,padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:13,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11677}}
-                                    , React.createElement('option', { value: "morning", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11678}}, "Morning")
-                                    , React.createElement('option', { value: "pre", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11679}}, "Pre-training")
-                                    , React.createElement('option', { value: "night", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11680}}, "Night")
+                                    style: {flex:1,padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:16,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11720}})
+                                  , React.createElement('select', { id: "supp_when_input", style: {flex:1,padding:"9px 12px",borderRadius:9,border:`1px solid ${BD}`,background:S1,color:T1,fontSize:13,outline:"none",fontFamily:"inherit"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11722}}
+                                    , React.createElement('option', { value: "morning", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11723}}, "Morning")
+                                    , React.createElement('option', { value: "pre", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11724}}, "Pre-training")
+                                    , React.createElement('option', { value: "night", __self: this, __source: {fileName: _jsxFileName, lineNumber: 11725}}, "Night")
                                   )
                                 )
-                                , React.createElement('div', { style: {display:"flex",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11683}}
+                                , React.createElement('div', { style: {display:"flex",gap:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11728}}
                                   , React.createElement('button', { onClick: ()=>{
-                                    const name = _optionalChain([document, 'access', _330 => _330.getElementById, 'call', _331 => _331("supp_name_input"), 'optionalAccess', _332 => _332.value, 'optionalAccess', _333 => _333.trim, 'call', _334 => _334()]);
-                                    const dose = _optionalChain([document, 'access', _335 => _335.getElementById, 'call', _336 => _336("supp_dose_input"), 'optionalAccess', _337 => _337.value, 'optionalAccess', _338 => _338.trim, 'call', _339 => _339()]);
-                                    const when = _optionalChain([document, 'access', _340 => _340.getElementById, 'call', _341 => _341("supp_when_input"), 'optionalAccess', _342 => _342.value])||"morning";
+                                    const name = _optionalChain([document, 'access', _332 => _332.getElementById, 'call', _333 => _333("supp_name_input"), 'optionalAccess', _334 => _334.value, 'optionalAccess', _335 => _335.trim, 'call', _336 => _336()]);
+                                    const dose = _optionalChain([document, 'access', _337 => _337.getElementById, 'call', _338 => _338("supp_dose_input"), 'optionalAccess', _339 => _339.value, 'optionalAccess', _340 => _340.trim, 'call', _341 => _341()]);
+                                    const when = _optionalChain([document, 'access', _342 => _342.getElementById, 'call', _343 => _343("supp_when_input"), 'optionalAccess', _344 => _344.value])||"morning";
                                     if (!name) return;
                                     const custom = [...(settings.customSupplements||[]),{name,dose,when,icon:"💊"}];
                                     const mySupps = [...(settings.mySupplements||[]),name];
                                     saveSettings({...settings,customSupplements:custom,mySupplements:mySupps});
                                     setExpandedSkills(p=>{const n=new Set(p);n.delete("add_supp");return n;});
-                                  }, style: {flex:1,padding:"9px",borderRadius:9,border:"none",background:GOLD,color:BG,fontWeight:700,fontSize:12,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11684}}, "Add")
-                                  , React.createElement('button', { onClick: ()=>setExpandedSkills(p=>{const n=new Set(p);n.delete("add_supp");return n;}), style: {flex:1,padding:"9px",borderRadius:9,border:`1px solid ${BD}`,background:"transparent",color:T3,fontSize:12,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11694}}, "Cancel")
+                                  }, style: {flex:1,padding:"9px",borderRadius:9,border:"none",background:GOLD,color:BG,fontWeight:700,fontSize:12,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11729}}, "Add")
+                                  , React.createElement('button', { onClick: ()=>setExpandedSkills(p=>{const n=new Set(p);n.delete("add_supp");return n;}), style: {flex:1,padding:"9px",borderRadius:9,border:`1px solid ${BD}`,background:"transparent",color:T3,fontSize:12,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11739}}, "Cancel")
                                 )
                               )
                             )
@@ -11732,7 +11777,7 @@ function AppInner() { // v3.1
             /* target weight — moved to Body section above */
 
             /* TRAINING */
-            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11710}}, "Training")
+            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11755}}, "Training")
 
             /* weaknesses */
             , renderMatchCalendarSection()
@@ -11749,14 +11794,14 @@ function AppInner() { // v3.1
             , renderCustomSkillSection()
 
             /* BACKUP */
-            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11727}}, "Backup")
-            , React.createElement('div', { style: {...card,padding:CP.tight,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11728}}
-              , React.createElement('div', { style: {display:"flex",gap:8,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11729}}
+            , React.createElement('div', { style: {...lbl,marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11772}}, "Backup")
+            , React.createElement('div', { style: {...card,padding:CP.tight,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11773}}
+              , React.createElement('div', { style: {display:"flex",gap:8,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11774}}
                 , React.createElement('button', { onClick: ()=>{
                   const csv=exportAllDataToCsv(history,scores,reflections,customDrills);
                   downloadCsv(csv,`portugal-${settings.jerseyNumber||9}-data-${todayK}.csv`);
-                }, style: {flex:1,padding:"11px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11730}}, "↓ Export CSV"  )
-                , React.createElement('button', { onClick: ()=>document.getElementById("settings-csv-import").click(), style: {flex:1,padding:"11px",borderRadius:10,border:`1px solid ${GOLD}44`,background:GOLDDIM,color:GOLD,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11734}}, "↑ Import CSV"  )
+                }, style: {flex:1,padding:"11px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11775}}, "↓ Export CSV"  )
+                , React.createElement('button', { onClick: ()=>document.getElementById("settings-csv-import").click(), style: {flex:1,padding:"11px",borderRadius:10,border:`1px solid ${GOLD}44`,background:GOLDDIM,color:GOLD,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11779}}, "↑ Import CSV"  )
                 , React.createElement('input', { id: "settings-csv-import", type: "file", accept: ".csv", onChange: (e)=>{
                   const file=e.target.files[0]; if(!file) return;
                   const reader=new FileReader();
@@ -11767,7 +11812,7 @@ function AppInner() { // v3.1
                   };
                   reader.readAsText(file);
                   e.target.value="";
-                }, style: {display:"none"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11735}})
+                }, style: {display:"none"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11780}})
               )
               /* Export all notes as readable text for AI analysis */
               , React.createElement('button', { onClick: ()=>{
@@ -11822,10 +11867,10 @@ function AppInner() { // v3.1
                 const a = document.createElement("a");
                 a.href=url; a.download=`training-notes-${todayK}.txt`; a.click();
                 URL.revokeObjectURL(url);
-              }, style: {width:"100%",padding:"11px",borderRadius:10,border:`1px solid ${PRP}44`,background:PRP+"11",color:PRP,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11748}}, "✏️ Export all notes as text (for AI)"
+              }, style: {width:"100%",padding:"11px",borderRadius:10,border:`1px solid ${PRP}44`,background:PRP+"11",color:PRP,fontSize:13,fontWeight:600,cursor:"pointer"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11793}}, "✏️ Export all notes as text (for AI)"
 
               )
-              , React.createElement('div', { style: {fontSize:10,color:T3,marginTop:6,lineHeight:1.5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11803}}, "Downloads a readable .txt file of all your performance notes and journal entries — paste into ChatGPT, Claude, or any AI to get a summary of your progress and areas to improve."                               )
+              , React.createElement('div', { style: {fontSize:10,color:T3,marginTop:6,lineHeight:1.5}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11848}}, "Downloads a readable .txt file of all your performance notes and journal entries — paste into ChatGPT, Claude, or any AI to get a summary of your progress and areas to improve."                               )
             )
           )
         )
@@ -11833,23 +11878,23 @@ function AppInner() { // v3.1
       /* ── MATCH REVIEW MODAL ── */
       , showMatchReview&&(
         React.createElement('div', { style: {position:"fixed",inset:0,background:"rgba(0,0,0,0.85)",zIndex:200,display:"flex",alignItems:"flex-end",justifyContent:"center"},
-          onClick: e=>{if(e.target===e.currentTarget)setShowMatchReview(false);}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11810}}
-          , React.createElement('div', { style: {width:"100%",maxWidth:480,background:S1,borderRadius:"20px 20px 0 0",padding:"20px 18px 36px",maxHeight:"85vh",overflowY:"auto"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11812}}
-            , React.createElement('div', { style: {display:"flex",alignItems:"center",marginBottom:18}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11813}}
-              , React.createElement('div', { style: {flex:1,fontSize:16,fontWeight:800,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11814}}, "📋 Post-match review"  )
-              , React.createElement('button', { onClick: ()=>setShowMatchReview(false), style: {background:"transparent",border:"none",color:T3,fontSize:20,cursor:"pointer",padding:"4px 8px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11815}}, "✕")
+          onClick: e=>{if(e.target===e.currentTarget)setShowMatchReview(false);}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11855}}
+          , React.createElement('div', { style: {width:"100%",maxWidth:480,background:S1,borderRadius:"20px 20px 0 0",padding:"20px 18px 36px",maxHeight:"85vh",overflowY:"auto"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11857}}
+            , React.createElement('div', { style: {display:"flex",alignItems:"center",marginBottom:18}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11858}}
+              , React.createElement('div', { style: {flex:1,fontSize:16,fontWeight:800,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11859}}, "📋 Post-match review"  )
+              , React.createElement('button', { onClick: ()=>setShowMatchReview(false), style: {background:"transparent",border:"none",color:T3,fontSize:20,cursor:"pointer",padding:"4px 8px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11860}}, "✕")
             )
-            , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11817}}
+            , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11862}}
               , [
                 {key:"opponent",label:"Opponent",placeholder:"e.g. Ireland",type:"text"},
                 {key:"result",label:"Result (W/L/D)",placeholder:"W",type:"text"},
                 {key:"score",label:"Score",placeholder:"24-17",type:"text"},
               ].map(f=>(
-                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11823}}
-                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11824}}, f.label)
+                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11868}}
+                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11869}}, f.label)
                   , React.createElement('input', { value: matchReviewDraft[f.key]||"", onChange: e=>setMatchReviewDraft(p=>({...p,[f.key]:e.target.value})),
                     placeholder: f.placeholder, type: f.type,
-                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11825}})
+                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11870}})
                 )
               ))
               , [
@@ -11858,48 +11903,48 @@ function AppInner() { // v3.1
                 {key:"turnoversLost",label:"Turnovers conceded",placeholder:"e.g. 2"},
                 {key:"decisionErrors",label:"Decision errors (honest count)",placeholder:"e.g. 2"},
               ].map(f=>(
-                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11836}}
-                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11837}}, f.label)
+                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11881}}
+                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11882}}, f.label)
                   , React.createElement('input', { value: matchReviewDraft[f.key]||"", onChange: e=>setMatchReviewDraft(p=>({...p,[f.key]:e.target.value})),
                     placeholder: f.placeholder,
-                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11838}})
+                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11883}})
                 )
               ))
               , [
                 {key:"standout",label:"Best moment",placeholder:"What did you do really well?"},
                 {key:"improve",label:"One thing to fix",placeholder:"What's the priority for next match?"},
               ].map(f=>(
-                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11847}}
-                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11848}}, f.label)
+                React.createElement('div', { key: f.key, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11892}}
+                  , React.createElement('div', { style: {...lbl,marginBottom:6}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11893}}, f.label)
                   , React.createElement('textarea', { value: matchReviewDraft[f.key]||"", onChange: e=>setMatchReviewDraft(p=>({...p,[f.key]:e.target.value})),
                     placeholder: f.placeholder, rows: 2,
-                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,resize:"vertical",boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11849}})
+                    style: {width:"100%",padding:"11px 13px",borderRadius:10,border:`1px solid ${BD}`,background:S2,color:T1,fontSize:15,outline:"none",fontFamily:"inherit",caretColor:GOLD,resize:"vertical",boxSizing:"border-box"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11894}})
                 )
               ))
               , React.createElement('button', { onClick: ()=>saveMatchReview({...matchReviewDraft,id:Date.now().toString(36)}),
-                style: {...btn.primary,width:"100%",marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11854}}, "Save review"
+                style: {...btn.primary,width:"100%",marginTop:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11899}}, "Save review"
 
               )
             )
             , matchReviews.length>0&&(
-              React.createElement('div', { style: {marginTop:20}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11860}}
-                , React.createElement('div', { style: {...lbl,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11861}}, "Past reviews" )
-                , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11862}}
+              React.createElement('div', { style: {marginTop:20}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11905}}
+                , React.createElement('div', { style: {...lbl,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11906}}, "Past reviews" )
+                , React.createElement('div', { style: {display:"flex",flexDirection:"column",gap:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11907}}
                   , matchReviews.slice(0,5).map((r,i)=>(
-                    React.createElement('div', { key: i, style: {background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11864}}
-                      , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",marginBottom:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11865}}
-                        , React.createElement('span', { style: {fontSize:13,fontWeight:700,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11866}}, r.opponent||"Match")
-                        , React.createElement('span', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11867}}, fmtDate(r.date))
+                    React.createElement('div', { key: i, style: {background:S2,borderRadius:10,padding:"10px 12px"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11909}}
+                      , React.createElement('div', { style: {display:"flex",justifyContent:"space-between",marginBottom:4}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11910}}
+                        , React.createElement('span', { style: {fontSize:13,fontWeight:700,color:T1}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11911}}, r.opponent||"Match")
+                        , React.createElement('span', { style: {fontSize:10,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11912}}, fmtDate(r.date))
                       )
-                      , React.createElement('div', { style: {display:"flex",gap:8,flexWrap:"wrap",marginBottom:r.standout||r.improve?6:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11869}}
-                        , r.result&&React.createElement('span', { style: {fontSize:11,color:r.result==="W"?GRNA:r.result==="L"?REDA:AMB,fontWeight:700}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11870}}, r.result, " " , r.score)
-                        , r.kickSuccess&&React.createElement('span', { style: {fontSize:11,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11871}}, "Kick: " , r.kickSuccess)
-                        , r.turnoversWon&&React.createElement('span', { style: {fontSize:11,color:GRNA}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11872}}, "+", r.turnoversWon, " TO" )
-                        , r.decisionErrors&&React.createElement('span', { style: {fontSize:11,color:AMB}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11873}}, r.decisionErrors, " errors" )
+                      , React.createElement('div', { style: {display:"flex",gap:8,flexWrap:"wrap",marginBottom:r.standout||r.improve?6:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11914}}
+                        , r.result&&React.createElement('span', { style: {fontSize:11,color:r.result==="W"?GRNA:r.result==="L"?REDA:AMB,fontWeight:700}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11915}}, r.result, " " , r.score)
+                        , r.kickSuccess&&React.createElement('span', { style: {fontSize:11,color:T3}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11916}}, "Kick: " , r.kickSuccess)
+                        , r.turnoversWon&&React.createElement('span', { style: {fontSize:11,color:GRNA}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11917}}, "+", r.turnoversWon, " TO" )
+                        , r.decisionErrors&&React.createElement('span', { style: {fontSize:11,color:AMB}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11918}}, r.decisionErrors, " errors" )
                       )
-                      , r.standout&&React.createElement('div', { style: {fontSize:12,color:T2,marginBottom:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11875}}, "✓ " , r.standout)
-                      , r.improve&&React.createElement('div', { style: {fontSize:12,color:AMB}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11876}}, "→ " , r.improve)
-                      , React.createElement('button', { onClick: ()=>deleteMatchReview(i), style: {fontSize:10,color:T3,background:"transparent",border:"none",cursor:"pointer",marginTop:4,padding:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11877}}, "delete")
+                      , r.standout&&React.createElement('div', { style: {fontSize:12,color:T2,marginBottom:2}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11920}}, "✓ " , r.standout)
+                      , r.improve&&React.createElement('div', { style: {fontSize:12,color:AMB}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11921}}, "→ " , r.improve)
+                      , React.createElement('button', { onClick: ()=>deleteMatchReview(i), style: {fontSize:10,color:T3,background:"transparent",border:"none",cursor:"pointer",marginTop:4,padding:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11922}}, "delete")
                     )
                   ))
                 )
@@ -11921,7 +11966,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false, errorMsg: null };
   }
   static getDerivedStateFromError(error) {
-    return { hasError: true, errorMsg: _optionalChain([error, 'optionalAccess', _343 => _343.message]) || String(error) };
+    return { hasError: true, errorMsg: _optionalChain([error, 'optionalAccess', _345 => _345.message]) || String(error) };
   }
   componentDidCatch(error, info) {
     try { console.error("App crashed:", error, info); } catch (e108) {}
@@ -11933,16 +11978,16 @@ class ErrorBoundary extends React.Component {
           fontFamily:"'Inter',-apple-system,sans-serif", background:BG, minHeight:"100vh",
           color:T1, display:"flex", flexDirection:"column", alignItems:"center",
           justifyContent:"center", padding:"32px 24px", textAlign:"center",
-        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11907}}
-          , React.createElement('div', { style: { fontSize:40, marginBottom:16 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11912}}, "🏉")
-          , React.createElement('div', { style: { fontSize:18, fontWeight:800, marginBottom:8 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11913}}, "Something went wrong"  )
-          , React.createElement('div', { style: { fontSize:13, color:T3, lineHeight:1.6, marginBottom:16, maxWidth:320 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11914}}, "Your data is safe — it's saved to your browser, not lost."
+        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11952}}
+          , React.createElement('div', { style: { fontSize:40, marginBottom:16 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11957}}, "🏉")
+          , React.createElement('div', { style: { fontSize:18, fontWeight:800, marginBottom:8 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11958}}, "Something went wrong"  )
+          , React.createElement('div', { style: { fontSize:13, color:T3, lineHeight:1.6, marginBottom:16, maxWidth:320 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11959}}, "Your data is safe — it's saved to your browser, not lost."
 
           )
           , this.state.errorMsg && (
             React.createElement('div', { style: { fontSize:11, color:REDA, background:S1, border:`1px solid ${REDA}44`,
               borderRadius:8, padding:"10px 14px", marginBottom:16, maxWidth:360,
-              wordBreak:"break-word", textAlign:"left", lineHeight:1.6 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11918}}
+              wordBreak:"break-word", textAlign:"left", lineHeight:1.6 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11963}}
               , this.state.errorMsg
             )
           )
@@ -11953,7 +11998,7 @@ class ErrorBoundary extends React.Component {
           }, style: {
             padding:"13px 28px", borderRadius:12, border:"none",
             background:GOLD, color:BG, fontWeight:800, fontSize:14, cursor:"pointer",
-          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11924}}, "Reload app"
+          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11969}}, "Reload app"
 
           )
         )
@@ -11967,7 +12012,7 @@ function App() {
   const [appKey, setAppKey] = React.useState(0);
   return (
     React.createElement(React.Fragment, null
-      , React.createElement('style', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 11945}}, `
+      , React.createElement('style', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 11990}}, `
         /* prevent iOS from zooming into inputs — must be font-size >= 16px */
         input, textarea, select { font-size: 16px !important; }
         /* prevent double-tap zoom on buttons */
@@ -11978,8 +12023,8 @@ function App() {
         .game-modal { touch-action: pan-y; overflow: hidden; }
         .game-modal * { touch-action: manipulation; }
       `)
-    , React.createElement(ErrorBoundary, { onReset: ()=>setAppKey(k=>k+1), __self: this, __source: {fileName: _jsxFileName, lineNumber: 11956}}
-      , React.createElement(AppInner, { key: appKey, __self: this, __source: {fileName: _jsxFileName, lineNumber: 11957}})
+    , React.createElement(ErrorBoundary, { onReset: ()=>setAppKey(k=>k+1), __self: this, __source: {fileName: _jsxFileName, lineNumber: 12001}}
+      , React.createElement(AppInner, { key: appKey, __self: this, __source: {fileName: _jsxFileName, lineNumber: 12002}})
     )
     )
   );
