@@ -5141,8 +5141,8 @@ function Progress({history, scores, reflections, customDrills, streak, wMin=83, 
       /* ── MOMENTUM ── */
       , progressView==="momentum"&&(
         React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 5118}}
-          , renderColdChart()
           , renderThisWeek()
+          , renderColdChart()
           , React.createElement('div', { style: {display:"flex",gap:7,marginBottom:10,flexWrap:"wrap"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 5121}}
             , React.createElement(Stat, { label: "Streak",    value: `${streak}d`,    sub: "days trained" , color: streak>=7?GOLD:streak>=3?AMB:T2, __self: this, __source: {fileName: _jsxFileName, lineNumber: 5122}})
             , React.createElement(Stat, { label: "Check-ins", value: entries.length,  sub: "days logged" ,  color: T1, __self: this, __source: {fileName: _jsxFileName, lineNumber: 5123}})
