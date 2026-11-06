@@ -6890,7 +6890,7 @@ function CognitivePrimeGame({onClose, onPointsScored=()=>{}, todayK=todayKey()})
   useEffect(() => {
     if (phase === "done" && ptsResult === null) {
       const perfect = answeredCount > 0 && correctCount === answeredCount;
-      const newStreak = perfect ? perfectStreak + 1 : 0;
+      const newStreak = perfect ? perfectStreak + 1 : perfectStreak;
       savePB("cogprime", { perfectStreak: newStreak, lastPct: pct, lastLevel: level });
       const res = saveGamePoints("cogprime", onPointsScored, todayK);
       setPtsResult(res);
