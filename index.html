@@ -6576,7 +6576,7 @@ function ReadAndDecideGame({onClose, onPointsScored=()=>{}, todayK=todayKey()}) 
 
 // ── Number Tracker (fixed) ────────────────────────────────────────────────────
 function NumberTrackerGame({onClose, onPointsScored=()=>{}, todayK=todayKey()}) {
-   const FLASH_MS_BASE = 1600;
+   const FLASH_MS_BASE = 3000;
 
   // Players positioned well clear of pitch lines (avoid x=0.35, x=0.50, x=0.65)
   // and avoid y=0.50 (halfway), y=0.22 (22m)
@@ -6615,7 +6615,7 @@ function NumberTrackerGame({onClose, onPointsScored=()=>{}, todayK=todayKey()}) 
   const pb = loadPB("numtrack");
   // Flash time only decreases with perfect streaks — wrong answers don't increase it beyond base
   const perfectStreak = _optionalChain([pb, 'optionalAccess', _125 => _125.perfectStreak]) || 0;
-  const flashMs = Math.max(400, FLASH_MS_BASE - (perfectStreak * 200));
+  const flashMs = Math.max(600, FLASH_MS_BASE - (perfectStreak * 200));
 
   const [round, setRound] = useState(0);
   const [phase, setPhase] = useState("intro");
